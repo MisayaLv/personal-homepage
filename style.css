@@ -1,0 +1,156 @@
+/* 1. 全局主题：深蓝底、浅色正文、青绿强调。变量集中管理，便于学习与调整。 */
+:root {
+  color-scheme: dark;
+  --bg: #0b1829;
+  --surface: #102238;
+  --surface-raised: #142b42;
+  --text: #edf4fa;
+  --muted: #b2c3d4;
+  --accent: #75dfce;
+  --line: #30475c;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; scroll-padding-top: 100px; }
+body { margin: 0; background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Microsoft YaHei', sans-serif; font-size: 16px; line-height: 1.8; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; }
+h1, h2, h3, p, li, a { overflow-wrap: anywhere; }
+h1, h2, h3 { line-height: 1.45; }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--accent); outline-offset: 5px; }
+.container { width: min(1120px, calc(100% - 64px)); margin-inline: auto; }
+/* min-width 防止 Grid/Flex 子元素因长标题挤出视口，不以隐藏溢出来掩盖问题。 */
+.hero-grid > *, .about-grid > *, .card-grid > *, .contact-grid > * { min-width: 0; }
+.skip-link { position: fixed; top: -100px; left: 16px; z-index: 100; padding: 10px 18px; color: var(--bg); background: var(--accent); }
+.skip-link:focus { top: 12px; }
+[hidden] { display: none !important; }
+
+/* 2. 导航：清晰的深色顶栏与轻量分隔，44px 以上的主要操作触达区域。 */
+.site-header { position: sticky; top: 0; z-index: 10; background: #0b1829; border-bottom: 1px solid var(--line); }
+.nav { display: flex; align-items: center; justify-content: space-between; min-height: 76px; gap: 24px; }
+.brand { display: flex; align-items: center; gap: 12px; font-size: 15px; font-weight: 650; white-space: nowrap; }
+.brand-mark { color: var(--accent); font-size: 28px; line-height: 1; }
+.version { color: var(--muted); font-size: 10px; border: 1px solid var(--line); border-radius: 4px; padding: 0 6px; }
+.nav-links { display: flex; gap: 30px; list-style: none; padding: 0; margin: 0; font-size: 14px; }
+.nav-links a { display: flex; align-items: center; min-height: 44px; color: var(--muted); }
+.nav-links a:hover { color: var(--accent); }
+.menu-toggle { min-height: 44px; padding: 6px 12px; color: var(--text); background: var(--surface); border: 1px solid var(--line); border-radius: 6px; }
+
+/* 3. Hero：柔和的静态青绿光晕与轻边框提供科技感，让姓名保持视觉主位。 */
+.hero { padding: 96px 0; border-bottom: 1px solid var(--line); background: radial-gradient(ellipse at 85% 35%, #123c441f, transparent 65%), var(--bg); }
+.hero-grid { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); align-items: center; gap: 64px; }
+.eyebrow { color: var(--accent); font-size: 11px; font-weight: 650; letter-spacing: .16em; margin: 0 0 18px; }
+h1 { font-size: clamp(32px, 3.6vw, 50px); letter-spacing: -.035em; margin: 0 0 22px; }
+h1 span { color: var(--accent); }
+.identity { font-size: 19px; font-weight: 600; margin: 0 0 8px; }
+.hero-description { font-size: 17px; color: var(--muted); margin: 0; max-width: 560px; }
+.actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.button { display: inline-flex; align-items: center; justify-content: center; gap: 18px; min-height: 46px; padding: 10px 18px; font-size: 14px; font-weight: 650; border: 1px solid var(--line); border-radius: 6px; }
+.primary { background: var(--accent); border-color: var(--accent); color: var(--bg); }
+.secondary { color: var(--text); background: transparent; }
+.research-panel { background: linear-gradient(145deg, #142e42, #102238); border: 1px solid #3b626b; border-radius: 12px; padding: 30px; }
+.panel-label { display: flex; justify-content: space-between; color: var(--accent); font-size: 11px; letter-spacing: .12em; margin: 0 0 30px; }
+/* 序号不是研究信息，隐藏以减少装饰；在 HTML 中仍为 aria-hidden。 */
+.topic-number { display: none; }
+.research-panel h2 { font-size: 28px; font-weight: 600; margin: 0 0 14px; }
+.research-panel > p:not(.panel-label):not(.panel-note) { font-size: 12px; color: var(--muted); }
+.research-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 24px; }
+.research-tags span { border: 1px solid var(--line); border-radius: 4px; padding: 3px 8px; font-size: 12px; color: #d9e8ed; }
+.panel-note { color: var(--muted); font-size: 12px; border-top: 1px solid var(--line); margin: 26px 0 0; padding-top: 18px; }
+
+/* 4. 内容排版：统一标题层级与模块间距，以分隔和留白代替多余装饰。 */
+.section { padding-block: 80px; }
+.section-heading { margin-bottom: 32px; }
+.section-heading .eyebrow { margin-bottom: 10px; }
+.section-heading h2 { font-size: 30px; font-weight: 650; margin: 0 0 12px; }
+.section-heading > p:last-child { color: var(--muted); font-size: 15px; margin: 0; max-width: 760px; }
+h3 { font-size: 19px; margin: 0 0 12px; font-weight: 600; }
+.about-grid { display: grid; grid-template-columns: 1fr 1.8fr; gap: 64px; }
+.education { padding-left: 22px; border-left: 2px solid var(--accent); }
+.small-label { color: var(--accent); font-size: 12px; font-weight: 600; }
+.education h3 { margin: 10px 0; }
+.education p { font-size: 15px; margin: 4px 0; }
+.muted { color: var(--muted); }
+.interests p { color: var(--muted); font-size: 15px; margin: 0 0 22px; }
+.tags { display: flex; flex-wrap: wrap; gap: 8px; }
+.tags span { color: #a3e6dc; background: #18383e; font-size: 12px; border-radius: 4px; padding: 3px 9px; }
+
+/* 5. 技能：用紧凑标签列表替代三张重复卡片，六项技能自动换行。 */
+.skills-section { background: var(--surface); border-block: 1px solid var(--line); }
+.skill-list { display: flex; flex-wrap: wrap; gap: 12px; padding: 0; margin: 0; list-style: none; }
+.skill-list li { color: var(--text); font-size: 15px; padding: 8px 20px; border: 1px solid #446274; border-radius: 6px; background: #163046; }
+
+/* 6. 项目：统一边框、圆角和内部排版；关键词与性质在卡片下部对齐。 */
+.card-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 24px; }
+.project-card { display: flex; flex-direction: column; padding: 28px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); }
+.project-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+.card-index { color: var(--accent); font: 13px ui-monospace, Consolas, monospace; }
+.status { color: #cee3eb; background: #233e50; font-size: 12px; padding: 3px 8px; border-radius: 4px; }
+.project-card h3 { font-size: 20px; margin: 24px 0 16px; }
+.project-card > p { color: var(--muted); font-size: 15px; margin: 0 0 26px; }
+.project-card .tags { margin-top: auto; }
+.project-card .project-note { color: var(--muted); font-size: 12px; border-top: 1px solid var(--line); padding-top: 18px; margin: 24px 0 0; }
+
+/* 7. 联系与页脚：沿用深蓝主题，通过层级和细线自然收尾。 */
+.contact-section { background: var(--surface); border-block: 1px solid var(--line); padding: 60px 0; }
+.contact-grid { display: grid; grid-template-columns: 1.5fr 1fr; gap: 48px; align-items: center; }
+.contact-section h2 { font-size: 30px; margin: 0 0 14px; }
+.contact-section p { color: var(--muted); font-size: 15px; margin: 0; }
+.contact-detail { border-left: 1px solid var(--line); padding-left: 32px; }
+.contact-detail p { color: var(--text); font-size: 24px; margin: 8px 0; }
+.contact-detail small { color: var(--muted); font-size: 12px; }
+.footer { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; padding-block: 26px; color: var(--muted); font-size: 12px; }
+.footer a { color: var(--accent); }
+
+/* 8. 交互：仅对支持精确指针的设备上浮 3px，无持续动画或夸大动效。 */
+a, button, .project-card, .skill-list li { transition: color 180ms ease, background-color 180ms ease, border-color 180ms ease, transform 180ms ease, box-shadow 180ms ease; }
+@media (hover: hover) and (pointer: fine) {
+  .primary:hover { background: #99eddf; border-color: #99eddf; transform: translateY(-2px); }
+  .secondary:hover, .menu-toggle:hover { border-color: var(--accent); background: var(--surface-raised); }
+  .project-card:hover { transform: translateY(-3px); border-color: #659eaa; box-shadow: 0 12px 28px #00000026; }
+  .skill-list li:hover { border-color: var(--accent); background: #1b3c4b; }
+  .footer a:hover { text-decoration: underline; text-underline-offset: 4px; }
+}
+
+/* 9. 响应式：中屏收紧间距，手机单列；内容本身可换行，不依赖 overflow-x:hidden。 */
+@media (max-width: 1000px) {
+  .hero-grid { gap: 32px; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); }
+  .card-grid { gap: 16px; }
+  .project-card { padding: 22px; }
+  .nav-links { gap: 22px; }
+}
+@media (max-width: 700px) {
+  html { scroll-padding-top: 88px; }
+  .container { width: calc(100% - 40px); }
+  .nav { min-height: 68px; flex-wrap: wrap; gap: 0; padding-block: 10px; }
+  .brand { font-size: 14px; gap: 9px; }
+  .nav-links { width: 100%; flex-wrap: wrap; gap: 4px 24px; padding-top: 12px; }
+  /* JS 失败时保持导航可见，与原来的渐进增强逻辑兼容。 */
+  .js .nav-links:not(.is-open) { display: none; }
+  /* 无 JS 时完整导航更高，使用普通文档流，避免遮挡锚点目标。 */
+  html:not(.js) .site-header { position: static; }
+  .hero { padding-block: 52px; }
+  h1 { font-size: clamp(30px, 7.4vw, 40px); }
+  .identity { font-size: 18px; }
+  .hero-description { font-size: 16px; }
+  .hero-grid, .about-grid, .card-grid, .contact-grid { grid-template-columns: minmax(0, 1fr); }
+  .hero-grid { gap: 36px; }
+  .research-panel { padding: 24px; }
+  .research-panel h2 { font-size: 25px; }
+  .section { padding-block: 52px; }
+  .section-heading h2, .contact-section h2 { font-size: 27px; }
+  .about-grid { gap: 32px; }
+  .skill-list { gap: 10px; }
+  .skill-list li { padding: 7px 15px; }
+  .card-grid { gap: 20px; }
+  .project-card { padding: 24px; }
+  .contact-section { padding-block: 48px; }
+  .contact-grid { gap: 28px; }
+  .contact-detail { border-left: 0; border-top: 1px solid var(--line); padding: 24px 0 0; }
+}
+@media (min-width: 701px) { .menu-toggle { display: none; } }
+/* 10. 尊重系统的减少动态效果偏好，关闭平滑滚动、过渡和位移。 */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  a, button, .project-card, .skill-list li { transition: none; }
+  .project-card:hover, .primary:hover { transform: none; }
+}
